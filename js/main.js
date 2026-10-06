@@ -58,6 +58,7 @@
           <div>
             <h3 data-site="name"></h3>
             <p data-site="tagline"></p>
+            <p class="affil"><span>Part of</span> <span data-site="church"></span> (<span data-site="churchShort"></span>)</p>
           </div>
           <div>
             <h3>Explore</h3>

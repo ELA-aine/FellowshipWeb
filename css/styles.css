@@ -372,3 +372,5 @@ html[lang^="zh"] {
 html[lang^="zh"] body { line-height: 1.85; letter-spacing: .02em; }
 html[lang^="zh"] .eyebrow { letter-spacing: .1em; }
 html[lang^="zh"] h1, html[lang^="zh"] h2, html[lang^="zh"] h3 { line-height: 1.35; letter-spacing: .01em; }
+
+.site-footer .affil { font-size: .9rem; color: #f1c99a; }

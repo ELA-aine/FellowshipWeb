@@ -4,6 +4,8 @@ window.SITE = {
   tagline: "A warm place to belong, grow, and walk together.",
   email: "hello@example.com",
   phone: "",
+  church: "Kitchener-Waterloo Chinese Alliance Church",
+  churchShort: "KWCAC",
   address: "612 Erb Street West, Waterloo, Ontario, Canada",
   meetings: [
     { day: "Friday", time: "6:15 PM", what: "Fellowship Dinner" },
