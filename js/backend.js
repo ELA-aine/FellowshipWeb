@@ -163,3 +163,13 @@ function setup() {
 }
 
 setup();
+
+// Show sign-in errors that Supabase puts in the URL (e.g. expired link).
+{
+  const p = new URLSearchParams(location.hash.replace(/^#/, "") || location.search);
+  const desc = p.get("error_description");
+  if (desc) {
+    toast("Sign-in problem: " + desc.replace(/\+/g, " "), "err");
+    history.replaceState(null, "", location.pathname);
+  }
+}
