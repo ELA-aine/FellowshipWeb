@@ -547,3 +547,19 @@ body.edit-mode [data-edit]:hover { background: rgba(224, 168, 74, .28); }
 body.edit-mode [data-edit]::after { content: " \270E"; font-size: .7em; font-style: normal; color: var(--terracotta-dark); }
 body.edit-mode .meet-band [data-edit] { outline-color: var(--gold); }
 body.edit-mode .meet-band [data-edit]::after { color: var(--gold); }
+
+/* ---------- Admin: photo upload buttons ---------- */
+[data-photo].has-photo { background-size: cover; background-position: center; }
+[data-photo].has-photo::after { display: none; }
+.slot-tools { position: absolute; right: .8rem; bottom: .8rem; display: flex; gap: .5rem; z-index: 4; }
+.slot-tools button {
+  background: rgba(59, 42, 32, .88); color: #fff; border: 0; border-radius: 999px;
+  padding: .45rem 1rem; font: inherit; font-size: .85rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+}
+.slot-tools button:hover { background: var(--terracotta-dark); }
+.hero-tools { top: 1rem; bottom: auto; right: 1rem; }
+
+/* ---------- Admin: edit-text mode keeps room around the dotted boxes ---------- */
+body.edit-mode .container { width: min(1120px, calc(100% - 3rem)); }
+body.edit-mode [data-edit] { padding: 8px 14px; margin-block: 10px; outline-offset: 3px; }
+body.edit-mode strong[data-edit], body.edit-mode span[data-edit] { display: block; }
