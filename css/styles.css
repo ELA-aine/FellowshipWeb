@@ -573,3 +573,7 @@ body.edit-mode strong[data-edit], body.edit-mode span[data-edit] { display: bloc
 @media (max-width: 860px) {
   .hero-text .lead, .hero-text .btn-row { max-width: none; }
 }
+
+.modal-extra { margin-top: 1.3rem; padding-top: 1rem; border-top: 1px solid #eadfce; text-align: center; }
+.modal-extra span { display: block; color: var(--muted); font-size: .85rem; margin-bottom: .6rem; }
+.modal-extra .btn { width: 100%; }

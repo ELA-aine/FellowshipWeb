@@ -74,7 +74,7 @@ export async function uploadImage(file, folder = "", max = 1920) {
 /* ---------- Modal form ---------- */
 // fields: [{ name, label, type: text|email|textarea|select|datetime-local|file|url, required, options, multiple, accept }]
 // Resolves with an object of values (files as arrays), or null if cancelled.
-export function formModal({ title, fields, submitLabel = "Save", values = {} }) {
+export function formModal({ title, fields, submitLabel = "Save", values = {}, extra = [] }) {
   return new Promise((resolve) => {
     const dlg = document.createElement("dialog");
     dlg.className = "modal";
@@ -125,6 +125,24 @@ export function formModal({ title, fields, submitLabel = "Save", values = {} }) 
     ok.textContent = submitLabel;
     row.append(cancel, ok);
     form.append(row);
+
+    // Optional alternative actions shown under the form, e.g. "Continue with GitHub".
+    if (extra.length) {
+      const box = document.createElement("div");
+      box.className = "modal-extra";
+      const or = document.createElement("span");
+      or.textContent = "or";
+      box.append(or);
+      extra.forEach((x) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "btn ghost";
+        b.textContent = x.label;
+        b.addEventListener("click", () => { done(null); x.run(); });
+        box.append(b);
+      });
+      form.append(box);
+    }
     dlg.append(form);
     document.body.append(dlg);
 
@@ -184,6 +202,16 @@ function setup() {
           { name: "email", label: "Your admin email", type: "email", required: true },
           { name: "password", label: "Password (leave blank to get an email link instead)", type: "password" },
         ],
+        extra: [{
+          label: "Continue with GitHub",
+          run: async () => {
+            const { error } = await sb.auth.signInWithOAuth({
+              provider: "github",
+              options: { redirectTo: location.origin + location.pathname },
+            });
+            if (error) toast(error.message, "err");
+          },
+        }],
       });
       if (!r) return;
       if (r.password) {
