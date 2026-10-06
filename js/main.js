@@ -17,6 +17,7 @@
   const links = [
     ["home", "index.html", "Welcome"],
     ["about", "about.html", "About Us"],
+    ["calendar", "calendar.html", "Calendar"],
     ["gallery", "gallery.html", "Gallery"],
     ["contact", "contact.html", "Contact"],
   ];
@@ -103,82 +104,6 @@
     }, { threshold: 0.12 });
     reveals.forEach((r) => io.observe(r));
   } else reveals.forEach((r) => r.classList.add("in"));
-
-  /* ---------- Gallery ---------- */
-  const G = window.GALLERY;
-  const albumBox = document.getElementById("albums");
-  const photoBox = document.getElementById("photos");
-  if (G && photoBox) {
-    if (albumBox) {
-      (G.albums || []).forEach((a) => {
-        const card = el("a", { class: "album", href: a.url, target: "_blank", rel: "noopener" }, [
-          el("img", { src: a.cover, alt: a.title, loading: "lazy" }),
-          el("div", { class: "album-body" }, [
-            el("h3", { text: a.title }),
-            el("p", { text: a.description || "" }),
-            el("span", { class: "album-link", text: `View on ${a.provider || "the web"} \u2197` }),
-          ]),
-        ]);
-        albumBox.append(card);
-      });
-      if (!(G.albums || []).length) albumBox.closest("section")?.remove();
-    }
-
-    const photos = G.photos || [];
-    const cats = ["All", ...new Set(photos.map((p) => p.category).filter(Boolean))];
-    const filterBox = document.getElementById("filters");
-    let visible = photos;
-
-    const lb = document.getElementById("lightbox");
-    const lbImg = lb.querySelector("img");
-    const lbCap = lb.querySelector("p");
-    let idx = 0;
-    const show = (i) => {
-      idx = (i + visible.length) % visible.length;
-      lbImg.src = visible[idx].src;
-      lbImg.alt = visible[idx].alt || "";
-      lbCap.textContent = visible[idx].caption || "";
-    };
-    const close = () => lb.classList.remove("open");
-
-    const render = (cat) => {
-      visible = cat === "All" ? photos : photos.filter((p) => p.category === cat);
-      photoBox.innerHTML = "";
-      if (!visible.length) photoBox.append(el("p", { class: "empty", text: "No photos yet." }));
-      visible.forEach((p, i) => {
-        const b = el("button", { class: "photo", "aria-label": "Open photo: " + (p.alt || p.caption || "") }, [
-          el("img", { src: p.src, alt: p.alt || "", loading: "lazy" }),
-          el("span", { text: p.caption || "" }),
-        ]);
-        b.addEventListener("click", () => { show(i); lb.classList.add("open"); });
-        photoBox.append(b);
-      });
-    };
-
-    if (filterBox && cats.length > 2) {
-      cats.forEach((c, i) => {
-        const chip = el("button", { class: "chip" + (i === 0 ? " active" : ""), text: c });
-        chip.addEventListener("click", () => {
-          filterBox.querySelectorAll(".chip").forEach((x) => x.classList.remove("active"));
-          chip.classList.add("active");
-          render(c);
-        });
-        filterBox.append(chip);
-      });
-    }
-    render("All");
-
-    lb.querySelector(".lb-close").addEventListener("click", close);
-    lb.querySelector(".lb-prev").addEventListener("click", () => show(idx - 1));
-    lb.querySelector(".lb-next").addEventListener("click", () => show(idx + 1));
-    lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
-    document.addEventListener("keydown", (e) => {
-      if (!lb.classList.contains("open")) return;
-      if (e.key === "Escape") close();
-      if (e.key === "ArrowLeft") show(idx - 1);
-      if (e.key === "ArrowRight") show(idx + 1);
-    });
-  }
 
   /* ---------- Contact form ---------- */
   const form = document.getElementById("contact-form");

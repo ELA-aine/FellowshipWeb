@@ -264,3 +264,96 @@ textarea { min-height: 150px; resize: vertical; }
 /* Meeting list on light backgrounds */
 .contact-grid .meet-list li { background: var(--sand); }
 .contact-grid .meet-list b { color: var(--terracotta-dark); }
+
+/* ---------- Calendar ---------- */
+.cal-layout { display: grid; grid-template-columns: 1.7fr 1fr; gap: 2.5rem; align-items: start; }
+.cal-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: .6rem; }
+.cal-head h2 { margin: 0; }
+.cal-nav { display: flex; gap: .5rem; }
+.legend { display: flex; gap: 1.2rem; flex-wrap: wrap; font-size: .85rem; color: var(--muted); margin-bottom: 1rem; }
+.legend span { display: inline-flex; align-items: center; gap: .4rem; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.dot.weekly { background: var(--sage); }
+.dot.fellowship { background: var(--terracotta); }
+.dot.church { background: #5b6fa8; }
+.dot.other { background: var(--gold); }
+.cal-weekdays, .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.cal-weekdays span { text-align: center; font-size: .8rem; font-weight: 600; color: var(--muted); padding-bottom: .4rem; }
+.day {
+  min-height: 98px; padding: .45rem; border-radius: 12px; border: 1.5px solid transparent;
+  background: var(--white); text-align: left; cursor: pointer; font: inherit; color: var(--ink);
+  display: flex; flex-direction: column; gap: 3px; overflow: hidden; transition: border-color .15s, transform .15s;
+}
+.day:hover { border-color: var(--terracotta); transform: translateY(-2px); }
+.day.dim { opacity: .45; }
+.day.today .num { background: var(--terracotta); color: #fff; }
+.day.selected { border-color: var(--terracotta-dark); box-shadow: 0 0 0 2px rgba(200, 100, 59, .2); }
+.day .num { font-size: .85rem; font-weight: 600; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; }
+.ev { font-size: .7rem; line-height: 1.25; padding: 2px 6px; border-radius: 6px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ev.weekly { background: var(--sage); }
+.ev.fellowship { background: var(--terracotta); }
+.ev.church { background: #5b6fa8; }
+.ev.other { background: var(--gold); color: var(--ink); }
+.more { font-size: .7rem; color: var(--muted); }
+.day-panel h3 { margin-bottom: 1rem; }
+.ev-card { border-left: 4px solid var(--sage); padding: .2rem 0 .2rem 1rem; margin-bottom: 1.2rem; }
+.ev-card.fellowship { border-color: var(--terracotta); }
+.ev-card.church { border-color: #5b6fa8; }
+.ev-card.other { border-color: var(--gold); }
+.ev-card h4 { margin: .2rem 0; font-family: var(--serif); font-size: 1.1rem; }
+.ev-card p { margin: 0 0 .3rem; font-size: .93rem; }
+.ev-meta { color: var(--muted); }
+.tag { display: inline-block; font-size: .72rem; font-weight: 600; padding: 2px 10px; border-radius: 999px; color: #fff; background: var(--sage); }
+.tag.fellowship { background: var(--terracotta); }
+.tag.church { background: #5b6fa8; }
+.tag.other { background: var(--gold); color: var(--ink); }
+.ev-actions { display: flex; gap: 1rem; margin-top: .3rem; }
+.link-btn { background: none; border: 0; padding: 0; font: inherit; font-size: .88rem; font-weight: 600; color: var(--terracotta-dark); cursor: pointer; }
+.link-btn.danger { color: #b3382b; }
+.upcoming { display: grid; gap: .7rem; margin-top: 1rem; }
+.up-row {
+  display: flex; align-items: center; gap: 1rem; background: var(--white); border: 0; border-radius: 14px;
+  padding: .8rem 1rem; cursor: pointer; text-align: left; font: inherit; color: var(--ink); box-shadow: var(--shadow);
+}
+.up-date { display: grid; text-align: center; font-size: .75rem; text-transform: uppercase; color: var(--muted); min-width: 42px; }
+.up-date b { font-family: var(--serif); font-size: 1.4rem; color: var(--ink); line-height: 1; }
+.up-info { flex: 1; display: grid; }
+.up-info small { color: var(--muted); }
+.up-card { text-decoration: none; color: inherit; display: block; }
+.up-card h3 { margin: .7rem 0 .3rem; }
+.up-card p { color: var(--muted); margin: 0; font-size: .95rem; }
+.day-panel .btn { margin-top: .5rem; }
+
+/* ---------- Admin ---------- */
+.admin-bar {
+  background: var(--ink); color: #f5e9db; font-size: .88rem; padding: .5rem 1rem;
+  display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap;
+}
+.admin-bar.denied { background: #8a3a2c; }
+.admin-bar button { background: rgba(255, 255, 255, .15); color: #fff; border: 0; border-radius: 999px; padding: .2rem .9rem; cursor: pointer; font: inherit; }
+.admin-tools { display: flex; gap: 1rem; flex-wrap: wrap; padding: 1.5rem 0 0; }
+.admin-tools[hidden], [hidden] { display: none !important; }
+.album-wrap, .photo-wrap { position: relative; }
+.photo-wrap { margin: 0 0 1.2rem; break-inside: avoid; }
+.photo-wrap .photo { margin: 0; }
+.del-btn {
+  position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; border: 0;
+  background: rgba(179, 56, 43, .92); color: #fff; font-size: 1.2rem; line-height: 1; cursor: pointer; z-index: 2;
+}
+.modal { border: 0; border-radius: var(--radius); padding: 2rem; width: min(480px, 92vw); background: var(--white); color: var(--ink); box-shadow: 0 20px 60px rgba(0, 0, 0, .35); }
+.modal::backdrop { background: rgba(30, 18, 10, .55); }
+.modal h3 { margin-bottom: 1.2rem; }
+.modal select { width: 100%; font: inherit; padding: .8rem 1rem; border-radius: 12px; border: 1.5px solid #e4d6c4; background: var(--cream); margin-bottom: 1.1rem; }
+.modal-actions { display: flex; justify-content: flex-end; gap: .8rem; margin-top: .5rem; }
+#toasts { position: fixed; bottom: 1.2rem; left: 50%; transform: translateX(-50%); z-index: 200; display: grid; gap: .5rem; }
+.toast { background: var(--ink); color: #fff; padding: .7rem 1.3rem; border-radius: 999px; box-shadow: var(--shadow); font-size: .92rem; }
+.toast.err { background: #b3382b; }
+
+@media (max-width: 860px) {
+  .cal-layout { grid-template-columns: 1fr; }
+  .day { min-height: 62px; padding: .3rem; }
+  .ev { font-size: 0; padding: 0; height: 6px; width: 6px; border-radius: 50%; display: inline-block; }
+  .day { flex-direction: row; flex-wrap: wrap; align-content: flex-start; }
+  .day .num { flex-basis: 100%; }
+  .more { display: none; }
+}
