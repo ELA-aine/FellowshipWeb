@@ -147,10 +147,19 @@ function setup() {
       e.preventDefault();
       const r = await formModal({
         title: "Admin sign in",
-        submitLabel: "Email me a sign-in link",
-        fields: [{ name: "email", label: "Your admin email", type: "email", required: true }],
+        submitLabel: "Sign in",
+        fields: [
+          { name: "email", label: "Your admin email", type: "email", required: true },
+          { name: "password", label: "Password (leave blank to get an email link instead)", type: "password" },
+        ],
       });
       if (!r) return;
+      if (r.password) {
+        const { error } = await sb.auth.signInWithPassword({ email: r.email.trim(), password: r.password });
+        if (error) toast(error.message, "err");
+        else location.reload();
+        return;
+      }
       const { error } = await sb.auth.signInWithOtp({
         email: r.email.trim(),
         options: { emailRedirectTo: location.origin + location.pathname },
