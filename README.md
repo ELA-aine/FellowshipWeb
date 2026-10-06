@@ -5,7 +5,7 @@ Meets Fridays at **612 Erb Street West, Waterloo, Ontario, Canada** (6:15 PM din
 
 Static site: plain HTML/CSS/JavaScript, **no build step, no npm, no framework**. Hosted on GitHub Pages; the only backend is Supabase (login, database, photo storage) called straight from the browser.
 
-Goals: clean, warm, friendly UI; bilingual (English + Simplified Chinese); admin-only photo upload and calendar editing.
+Goals: clean, warm, friendly UI; general fellowship info only (no personal info or names of individuals on the public site); bilingual (English + Simplified Chinese); admin-only photo upload and calendar editing.
 
 ## Run locally
 
@@ -40,7 +40,7 @@ Script order on each page matters: `data/site.js` → `data/zh.js` → `js/i18n.
 ## Content conventions
 
 - Edit site-wide facts in `data/site.js` (the `data-site="..."` attributes in HTML are filled from it). Do not hardcode the address, email or meeting times in HTML.
-- Placeholder content still to be replaced by the real fellowship: `[bracketed]` text on `about.html` (story, leaders), the beliefs wording, `email: "hello@example.com"`, and the sample gallery images/albums/events.
+- Placeholder content still to be replaced by the real fellowship: `[bracketed]` text on `about.html` (story), the beliefs wording, `email: "hello@example.com"`, and the sample gallery images/albums/events.
 - Avoid external dependencies. Current external loads: Google Fonts and `esm.sh` (Supabase client). If `esm.sh` fails, the site degrades to read-only sample data on purpose.
 - Build DOM with `textContent`/`createElement` (not `innerHTML` with data) for anything that comes from the database.
 
