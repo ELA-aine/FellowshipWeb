@@ -15,18 +15,23 @@
 
   <main>
     <section class="hero">
-      <div class="container">
-        <span class="eyebrow">Welcome</span>
-        <h1>You belong here.</h1>
-        <p class="lead">We're a fellowship of friends and families who love God and love one another. Whoever you are, wherever you are on your journey, there's a seat for you at our table.</p>
-        <div class="btn-row">
-          <a class="btn" href="contact.html">Plan a visit</a>
-          <a class="btn ghost" href="about.html">Who we are</a>
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <span class="eyebrow">Welcome</span>
+          <h1>You belong here.</h1>
+          <p class="lead">We're a fellowship of friends and families who love God and love one another. Whoever you are, wherever you are on your journey, there's a seat for you at our table.</p>
+          <div class="btn-row">
+            <a class="btn" href="contact.html">Plan a visit</a>
+            <a class="btn ghost" href="about.html">Who we are</a>
+          </div>
         </div>
-      </div>
-      <div class="hero-card">
-        <strong>Join us this week</strong>
-        <span data-next-meeting></span>
+        <div class="hero-visual">
+          <div class="hero-slides" id="hero-slides" role="img" aria-label="Fellowship photos"></div>
+          <div class="hero-card">
+            <strong>Join us this week</strong>
+            <span data-next-meeting></span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -110,7 +115,9 @@
   <script src="data/zh.js"></script>
   <script src="js/i18n.js"></script>
   <script src="data/events.js"></script>
+  <script src="data/gallery.js"></script>
   <script src="js/main.js"></script>
   <script type="module" src="js/home.js"></script>
+  <script type="module" src="js/hero.js"></script>
 </body>
 </html>
