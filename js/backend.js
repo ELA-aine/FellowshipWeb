@@ -39,6 +39,32 @@ export function toast(message, type = "ok") {
   setTimeout(() => t.remove(), type === "err" ? 6000 : 3500);
 }
 
+/* ---------- Image upload (resizes in the browser, stores in the "gallery" bucket) ---------- */
+async function shrinkImage(file, max) {
+  if (!file.type.startsWith("image/") || file.type === "image/gif") return file;
+  try {
+    const bmp = await createImageBitmap(file, { imageOrientation: "from-image" });
+    const scale = Math.min(1, max / Math.max(bmp.width, bmp.height));
+    const c = document.createElement("canvas");
+    c.width = Math.round(bmp.width * scale);
+    c.height = Math.round(bmp.height * scale);
+    c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
+    return (await new Promise((r) => c.toBlob(r, "image/jpeg", 0.88))) || file;
+  } catch {
+    return file;
+  }
+}
+
+export async function uploadImage(file, folder = "", max = 1920) {
+  const blob = await shrinkImage(file, max);
+  const ext = blob.type === "image/jpeg" ? "jpg" : (file.name.split(".").pop() || "bin").toLowerCase();
+  const path = `${folder ? folder + "/" : ""}${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+  const { error } = await sb.storage.from("gallery").upload(path, blob, { contentType: blob.type || file.type });
+  if (error) throw error;
+  const { data } = sb.storage.from("gallery").getPublicUrl(path);
+  return { path, url: data.publicUrl };
+}
+
 /* ---------- Modal form ---------- */
 // fields: [{ name, label, type: text|email|textarea|select|datetime-local|file|url, required, options, multiple, accept }]
 // Resolves with an object of values (files as arrays), or null if cancelled.

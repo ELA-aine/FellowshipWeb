@@ -7,6 +7,9 @@ window.SITE = {
   church: "Kitchener-Waterloo Chinese Alliance Church",
   churchShort: "KWCAC",
   churchUrl: "https://www.kwcac.ca/",
+  // Link where people order Friday dinner. The "Order food" box on the Welcome
+  // page stays hidden until this is filled in.
+  orderUrl: "",
   address: "612 Erb Street West, Waterloo, Ontario, Canada",
   meetings: [
     { day: "Friday", time: "6:15 PM", what: "Fellowship Dinner" },

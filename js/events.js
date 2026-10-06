@@ -56,6 +56,15 @@ export function weeklyOn(date) {
     });
 }
 
+// Midnight of the next date (today included) that falls on the given weekday name.
+export function nextOccurrence(dayName) {
+  const target = DAYS.indexOf(String(dayName).toLowerCase());
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  d.setDate(d.getDate() + ((target - d.getDay() + 7) % 7));
+  return d;
+}
+
 export const sameDay = (a, b) => a.toDateString() === b.toDateString();
 export const loc = () => (window.I18N ? window.I18N.locale() : undefined);
 export const fmtTime = (d) => d.toLocaleTimeString(loc(), { hour: "numeric", minute: "2-digit" });

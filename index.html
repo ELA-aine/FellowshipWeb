@@ -35,6 +35,29 @@
       </div>
     </section>
 
+    <section class="section alt" id="this-week">
+      <div class="container">
+        <div id="weekly-grid" class="weekly-grid">
+          <a id="poster" class="poster" target="_blank" rel="noopener" hidden>
+            <img alt="This week's poster">
+          </a>
+          <div class="weekly-info">
+            <span class="eyebrow">This week's event</span>
+            <h2 id="weekly-date"></h2>
+            <ul id="weekly-times" class="weekly-times"></ul>
+            <p class="weekly-place" data-site="address"></p>
+            <div id="order-card" class="order-card" hidden>
+              <h3>Order food</h3>
+              <p>Order your dinner here.</p>
+              <p class="free-note">New friend? Your first order is free!</p>
+              <a id="order-btn" class="btn" target="_blank" rel="noopener">Order food &#8599;</a>
+            </div>
+            <div id="poster-admin" class="admin-tools" hidden></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section">
       <div class="container">
         <div class="center reveal">
@@ -119,5 +142,6 @@
   <script src="js/main.js"></script>
   <script type="module" src="js/home.js"></script>
   <script type="module" src="js/hero.js"></script>
+  <script type="module" src="js/weekly.js"></script>
 </body>
 </html>

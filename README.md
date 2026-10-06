@@ -31,8 +31,10 @@ python3 -m http.server 8000      # then open http://localhost:8000/
 | `js/i18n.js` | Language toggle and in-place translator. |
 | `js/backend.js` | **ES module**: Supabase client, admin login UI, `toast()`, `formModal()` helpers. Exports `sb`, `isAdmin`, `user`. |
 | `js/events.js` | Event loading and date helpers (locale-aware). Generates recurring weekly meetings from `SITE.meetings`. |
+| `js/hero.js` | Welcome hero slideshow (newest gallery photos, blended into the right of the header). |
+| `js/weekly.js` | Welcome "This week's event": next Friday's date/times, weekly poster (admin uploads it), order-food box (`orderUrl` in `data/site.js`; hidden while empty). |
 | `js/calendar.js` / `js/home.js` / `js/gallery.js` | Page logic (modules). Calendar month grid and admin event CRUD; home "upcoming" cards; gallery with lightbox plus admin upload/delete. |
-| `supabase/setup.sql` | Tables, RLS policies, storage bucket. Run once in the Supabase SQL editor. |
+| `supabase/setup.sql`, `supabase/002_weekly_poster.sql` | Tables, RLS policies, storage bucket. Run `setup.sql` first, then `002_weekly_poster.sql` (weekly poster table), once each in the Supabase SQL editor. |
 | `images/gallery/` | Placeholder SVGs for the gallery samples. |
 
 Script order on each page matters: `data/site.js` → `data/zh.js` → `js/i18n.js` → `js/main.js` (classic), then modules (`js/calendar.js` etc.). `js/backend.js` loads through those modules, or directly on pages without one.
@@ -58,7 +60,7 @@ Script order on each page matters: `data/site.js` → `data/zh.js` → `js/i18n.
 ## Backend: Supabase
 
 - Project URL and **publishable key** are in `data/site.js`. They are public by design; security is enforced by Row Level Security.
-- Tables: `events`, `photos`, `albums`. Storage bucket: `gallery` (public read). Everything is public-read; **writes allowed only if `public.is_admin()`**, which checks the JWT email against a hard-coded list in `supabase/setup.sql`.
+- Tables: `events`, `photos`, `albums`, `posters` (weekly poster, one per Friday; only the poster for today or later is shown). Storage bucket: `gallery` (public read). Everything is public-read; **writes allowed only if `public.is_admin()`**, which checks the JWT email against a hard-coded list in `supabase/setup.sql`.
 - **Admins:** `elianm040511@gmail.com`. To add one, add the email to the array in `is_admin()` in `supabase/setup.sql` (re-run the function) **and** to `adminEmails` in `data/site.js`. The JS check only controls which buttons show; the database is the real gate.
 - Admin sign-in: footer "Admin login" → email + password (preferred), or leave password blank for an emailed magic link. Supabase's built-in email sender is limited to a couple of emails/hour on the free tier ("email rate limit exceeded"), so use password sign-in; the admin user was created in the Supabase dashboard (Authentication > Users > Add user, "Auto Confirm User" ticked).
 - Admin features: calendar add/edit/delete; gallery photo upload (images are resized to 1920px JPEG in the browser), photo delete, cloud-album links.
