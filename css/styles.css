@@ -460,3 +460,6 @@ body[data-page="home"] .site-footer { --prev: var(--sand); }
   .hero::before, .hero::after, .page-hero::after { animation: none !important; }
   .photo-wrap, .icon { transition: none !important; }
 }
+
+.ext-link { font-weight: 600; text-decoration: none; border-bottom: 2px solid currentColor; padding-bottom: 1px; }
+.meet-band .ext-link { color: var(--gold); }

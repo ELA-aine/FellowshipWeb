@@ -6,6 +6,7 @@ window.SITE = {
   phone: "",
   church: "Kitchener-Waterloo Chinese Alliance Church",
   churchShort: "KWCAC",
+  churchUrl: "https://www.kwcac.ca/",
   address: "612 Erb Street West, Waterloo, Ontario, Canada",
   meetings: [
     { day: "Friday", time: "6:15 PM", what: "Fellowship Dinner" },
