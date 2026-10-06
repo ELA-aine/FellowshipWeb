@@ -6,9 +6,9 @@ window.ZH = {
   "Joshua Fellowship": "约书亚团契",
   "A warm place to belong, grow, and walk together.": "一个让你归属、成长、同行的温暖之家。",
   "612 Erb Street West, Waterloo, Ontario, Canada": "加拿大安大略省滑铁卢市 Erb Street West 612 号",
-  "Kitchener-Waterloo Chinese Alliance Church": "基奇纳-滑铁卢华人宣道会",
+  "Kitchener-Waterloo Chinese Alliance Church": "活泉华人宣道会",
   "Part of": "隶属于",
-  "Joshua Fellowship is part of the Kitchener-Waterloo Chinese Alliance Church (KWCAC), and we gather under the care of our wider church family.": "约书亚团契隶属于基奇纳-滑铁卢华人宣道会（KWCAC），在教会大家庭的牧养与关怀下聚会。",
+  "Joshua Fellowship is part of the Kitchener-Waterloo Chinese Alliance Church (KWCAC), and we gather under the care of our wider church family.": "约书亚团契隶属于活泉华人宣道会（KWCAC），在教会大家庭的牧养与关怀下聚会。",
   "Fellowship Dinner": "团契晚餐",
   "Fellowship Gathering": "团契聚会",
 
