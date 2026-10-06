@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gallery | Our Fellowship</title>
+  <meta name="description" content="Photos from our fellowship gatherings, retreats and celebrations.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="gallery">
+  <header id="site-header"></header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Gallery</span>
+        <h1>Moments together</h1>
+        <p class="lead">A glimpse of life in our fellowship: worship, meals, laughter and service.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-bottom:1rem">
+      <div class="container">
+        <h2>Full albums</h2>
+        <p class="lead" style="margin-bottom:2rem">These open in our cloud photo albums, where you can browse and download everything.</p>
+        <div id="albums" class="albums"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Highlights</h2>
+        <div id="filters" class="filters"></div>
+        <div id="photos" class="photos"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lb-btn lb-close" aria-label="Close">&times;</button>
+    <button class="lb-btn lb-prev" aria-label="Previous photo">&#8249;</button>
+    <img alt="">
+    <p></p>
+    <button class="lb-btn lb-next" aria-label="Next photo">&#8250;</button>
+  </div>
+
+  <footer id="site-footer"></footer>
+  <script src="data/site.js"></script>
+  <script src="data/gallery.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
