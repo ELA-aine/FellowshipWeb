@@ -95,7 +95,7 @@ p { margin: 0 0 1em; }
     radial-gradient(circle at 10% 90%, rgba(127, 148, 112, .25), transparent 45%),
     var(--cream);
 }
-.hero h1 { max-width: 14ch; }
+.hero h1 { max-width: none; }
 .hero .lead { font-size: 1.25rem; }
 .hero-card {
   position: absolute; right: 6%; bottom: 2.5rem; width: 260px;
@@ -563,3 +563,13 @@ body.edit-mode .meet-band [data-edit]::after { color: var(--gold); }
 body.edit-mode .container { width: min(1120px, calc(100% - 3rem)); }
 body.edit-mode [data-edit] { padding: 8px 14px; margin-block: 10px; outline-offset: 3px; }
 body.edit-mode strong[data-edit], body.edit-mode span[data-edit] { display: block; }
+
+/* ---------- Headings stay on one line (js/fit.js shrinks them if they would overflow) ---------- */
+.js-fit main h1, .js-fit main h2, .js-fit main h3 { white-space: nowrap; }
+/* hero: the headline may run wider than the text column (over the faded photo); body text stays narrow */
+.hero-text { max-width: none; }
+.hero-text .lead { max-width: min(540px, 48vw); }
+.hero-text .btn-row { max-width: min(540px, 48vw); }
+@media (max-width: 860px) {
+  .hero-text .lead, .hero-text .btn-row { max-width: none; }
+}

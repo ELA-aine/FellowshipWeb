@@ -27,6 +27,7 @@ python3 -m http.server 8000      # then open http://localhost:8000/
 | `data/gallery.js` | Static albums (cloud links) and photos. Currently placeholder samples. |
 | `data/events.js` | Sample calendar events, shown only when Supabase is unreachable. Real events live in Supabase. |
 | `data/zh.js` | Simplified Chinese dictionary (see Translation). |
+| `js/fit.js` | Keeps h1/h2/h3 on one line: CSS `nowrap` plus shrink-to-fit; falls back to wrapping if even the minimum size overflows. |
 | `js/main.js` | Classic script: injects header/footer, fills `data-site` fields, weekly meeting lists, scroll reveal, contact form. |
 | `js/i18n.js` | Language toggle and in-place translator. |
 | `js/backend.js` | **ES module**: Supabase client, admin login UI, `toast()`, `formModal()` helpers. Exports `sb`, `isAdmin`, `user`. |

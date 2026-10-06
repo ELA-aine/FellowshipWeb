@@ -28,7 +28,7 @@ if (sb && els.length) {
       touched.delete(el);
     }
   }
-  const applyAll = () => els.forEach(apply);
+  const applyAll = () => { els.forEach(apply); window.dispatchEvent(new Event("textchange")); };
 
   const { data, error } = await sb.from("site_texts").select("key,en,zh");
   if (error) console.warn("Editable text unavailable (run supabase/003_site_texts.sql?):", error.message);
@@ -90,6 +90,7 @@ if (sb && els.length) {
         toast("Saved.");
       }
       apply(el);
+      window.dispatchEvent(new Event("textchange"));
     }
   }
 }
