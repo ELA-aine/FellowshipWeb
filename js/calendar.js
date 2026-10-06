@@ -1,5 +1,5 @@
 import { sb, isAdmin, formModal, toast } from "./backend.js";
-import { loadEvents, eventsOn, sameDay, catClass, CATEGORIES, fmtTime, fmtDate, fmtShort, toLocalInput } from "./events.js";
+import { loadEvents, eventsOn, sameDay, catClass, CATEGORIES, fmtTime, fmtDate, toLocalInput, loc } from "./events.js";
 
 const $ = (id) => document.getElementById(id);
 const el = (tag, cls, text) => {
@@ -21,7 +21,7 @@ async function refresh() {
 }
 
 function render() {
-  $("cal-title").textContent = month.toLocaleDateString([], { month: "long", year: "numeric" });
+  $("cal-title").textContent = month.toLocaleDateString(loc(), { month: "long", year: "numeric" });
   const grid = $("cal-grid");
   grid.innerHTML = "";
 
@@ -54,7 +54,10 @@ function eventCard(e, withEdit) {
   card.append(el("span", "tag " + catClass(e.category), e.category));
   card.append(el("h4", "", e.title));
   const when = fmtTime(e.start) + (e.end && sameDay(e.start, e.end) ? " \u2013 " + fmtTime(e.end) : "");
-  card.append(el("p", "ev-meta", when + (e.location ? " \u00b7 " + e.location : "")));
+  const meta = el("p", "ev-meta");
+  meta.append(el("span", "", when));
+  if (e.location) meta.append(document.createTextNode(" \u00b7 "), el("span", "", e.location));
+  card.append(meta);
   if (e.description) card.append(el("p", "", e.description));
   if (withEdit && canEdit() && e.source === "db") {
     const row = el("div", "ev-actions");
@@ -93,9 +96,12 @@ function renderUpcoming() {
     const row = el("button", "up-row");
     row.type = "button";
     const date = el("span", "up-date");
-    date.append(el("b", "", String(e.start.getDate())), document.createTextNode(e.start.toLocaleDateString([], { month: "short" })));
+    date.append(el("b", "", String(e.start.getDate())), document.createTextNode(e.start.toLocaleDateString(loc(), { month: "short" })));
     const info = el("span", "up-info");
-    info.append(el("strong", "", e.title), el("small", "", `${fmtTime(e.start)}${e.location ? " \u00b7 " + e.location : ""}`));
+    const small = el("small");
+    small.append(el("span", "", fmtTime(e.start)));
+    if (e.location) small.append(document.createTextNode(" \u00b7 "), el("span", "", e.location));
+    info.append(el("strong", "", e.title), small);
     row.append(date, info, el("span", "dot " + catClass(e.category)));
     row.addEventListener("click", () => {
       selected = e.start;
@@ -149,7 +155,8 @@ async function editEvent(ev) {
   toast(ev ? "Event updated." : "Event added.");
   selected = start;
   month = new Date(start.getFullYear(), start.getMonth(), 1);
-  await refresh();
+  await window.addEventListener("langchange", render);
+refresh();
 }
 
 async function removeEvent(ev) {

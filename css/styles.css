@@ -357,3 +357,18 @@ textarea { min-height: 150px; resize: vertical; }
   .day .num { flex-basis: 100%; }
   .more { display: none; }
 }
+
+/* ---------- Language toggle & Chinese typography ---------- */
+.nav-right { display: flex; align-items: center; gap: .6rem; }
+.lang-btn {
+  padding: .35rem .9rem; border-radius: 999px; border: 1.5px solid var(--terracotta);
+  background: transparent; color: var(--terracotta-dark); font: inherit; font-size: .88rem; font-weight: 600; cursor: pointer;
+}
+.lang-btn:hover { background: var(--terracotta); color: #fff; }
+html[lang^="zh"] {
+  --serif: "Fraunces", "Songti SC", "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+  --sans: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+}
+html[lang^="zh"] body { line-height: 1.85; letter-spacing: .02em; }
+html[lang^="zh"] .eyebrow { letter-spacing: .1em; }
+html[lang^="zh"] h1, html[lang^="zh"] h2, html[lang^="zh"] h3 { line-height: 1.35; letter-spacing: .01em; }

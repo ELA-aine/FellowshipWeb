@@ -6,9 +6,9 @@ if (box) {
   const start = new Date();
   start.setHours(0, 0, 0, 0);
   const next = events.filter((e) => e.start >= start).sort((a, b) => a.start - b.start).slice(0, 3);
-  if (!next.length) {
-    box.closest("section").hidden = true;
-  } else {
+
+  const draw = () => {
+    box.innerHTML = "";
     next.forEach((e) => {
       const card = document.createElement("a");
       card.href = "calendar.html";
@@ -19,9 +19,22 @@ if (box) {
       const h = document.createElement("h3");
       h.textContent = e.title;
       const p = document.createElement("p");
-      p.textContent = `${fmtShort(e.start)} \u00b7 ${fmtTime(e.start)}${e.location ? " \u00b7 " + e.location : ""}`;
+      const when = document.createElement("span");
+      when.textContent = `${fmtShort(e.start)} \u00b7 ${fmtTime(e.start)}`;
+      p.append(when);
+      if (e.location) {
+        const loc = document.createElement("span");
+        loc.textContent = e.location;
+        p.append(document.createTextNode(" \u00b7 "), loc);
+      }
       card.append(tag, h, p);
       box.append(card);
     });
+  };
+
+  if (!next.length) box.closest("section").hidden = true;
+  else {
+    draw();
+    window.addEventListener("langchange", draw);
   }
 }

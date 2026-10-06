@@ -57,9 +57,10 @@ export function weeklyOn(date) {
 }
 
 export const sameDay = (a, b) => a.toDateString() === b.toDateString();
-export const fmtTime = (d) => d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-export const fmtDate = (d) => d.toLocaleDateString([], { weekday: "long", month: "long", day: "numeric" });
-export const fmtShort = (d) => d.toLocaleDateString([], { month: "short", day: "numeric" });
+export const loc = () => (window.I18N ? window.I18N.locale() : undefined);
+export const fmtTime = (d) => d.toLocaleTimeString(loc(), { hour: "numeric", minute: "2-digit" });
+export const fmtDate = (d) => d.toLocaleDateString(loc(), { weekday: "long", month: "long", day: "numeric" });
+export const fmtShort = (d) => d.toLocaleDateString(loc(), { month: "short", day: "numeric" });
 
 export function toLocalInput(d) {
   const p = (n) => String(n).padStart(2, "0");

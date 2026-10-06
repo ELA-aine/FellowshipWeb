@@ -28,13 +28,16 @@
     header.innerHTML = `
       <div class="container nav">
         <a class="brand" href="index.html"><span class="brand-mark"></span><span data-site="name"></span></a>
-        <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-        </button>
-        <ul class="nav-links">
-          ${links.map(([id, href, label]) =>
-            `<li><a href="${href}"${id === page ? ' aria-current="page"' : ""}>${label}</a></li>`).join("")}
-        </ul>
+        <div class="nav-right">
+          <ul class="nav-links">
+            ${links.map(([id, href, label]) =>
+              `<li><a href="${href}"${id === page ? ' aria-current="page"' : ""}>${label}</a></li>`).join("")}
+          </ul>
+          <button class="lang-btn" type="button" title="Switch language / 切换语言">中文</button>
+          <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+        </div>
       </div>`;
     const btn = header.querySelector(".menu-btn");
     const list = header.querySelector(".nav-links");
@@ -86,7 +89,11 @@
   meetings.forEach((ul) => {
     (S.meetings || []).forEach((m) => {
       ul.append(el("li", {}, [
-        el("span", { html: `<b>${m.day}</b> &middot; ${m.what}` }),
+        el("span", {}, [
+          el("b", { text: m.day }),
+          document.createTextNode(" \u00b7 "),
+          el("span", { text: m.what }),
+        ]),
         el("span", { text: m.time }),
       ]));
     });
