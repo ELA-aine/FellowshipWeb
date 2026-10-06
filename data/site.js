@@ -26,8 +26,6 @@ window.SITE = {
   // The anon key is safe to publish; security is enforced by the database.
   supabaseUrl: "https://zhgtbyttdcicsgzbrffc.supabase.co",
   supabaseAnonKey: "sb_publishable_zBCSaGnTLGn8Ri3xRie6MA_YC7XdpkA",
-  // Emails allowed to sign in as admin. Must match the list in supabase/setup.sql.
-  adminEmails: ["elianm040511@gmail.com"],
   social: [
     // { label: "Instagram", url: "https://instagram.com/yourpage" },
     // { label: "YouTube", url: "https://youtube.com/@yourchannel" }

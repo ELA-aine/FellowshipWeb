@@ -38,7 +38,7 @@ python3 -m http.server 8000      # then open http://localhost:8000/
 | `js/hero.js` | Welcome hero slideshow (newest gallery photos, blended into the right of the header). |
 | `js/weekly.js` | Welcome "This week's event": next Friday's date/times, weekly poster (admin uploads it), order-food box (`orderUrl` in `data/site.js`; hidden while empty). |
 | `js/calendar.js` / `js/home.js` / `js/gallery.js` | Page logic (modules). Calendar month grid and admin event CRUD; home "upcoming" cards; gallery with lightbox plus admin upload/delete. |
-| `supabase/setup.sql`, `supabase/002_weekly_poster.sql`, `supabase/003_site_texts.sql`, `supabase/004_site_photos.sql` | Tables, RLS policies, storage bucket. Run `setup.sql` first, then `002_weekly_poster.sql` (weekly poster) and `003_site_texts.sql` (editable text) and `004_site_photos.sql` (photo slots), once each in the Supabase SQL editor. |
+| `supabase/setup.sql`, `supabase/002_weekly_poster.sql`, `supabase/003_site_texts.sql`, `supabase/004_site_photos.sql`, `supabase/005_admins_table.sql` | Tables, RLS policies, storage bucket. Run `setup.sql` first, then `002_weekly_poster.sql` (weekly poster) and `003_site_texts.sql` (editable text) and `004_site_photos.sql` (photo slots), once each in the Supabase SQL editor. |
 | `images/gallery/` | Placeholder SVGs for the gallery samples. |
 
 Script order on each page matters: `data/site.js` → `data/zh.js` → `js/i18n.js` → `js/main.js` (classic), then modules (`js/calendar.js` etc.). `js/backend.js` loads through those modules, or directly on pages without one.
@@ -71,7 +71,7 @@ Script order on each page matters: `data/site.js` → `data/zh.js` → `js/i18n.
 
 - Project URL and **publishable key** are in `data/site.js`. They are public by design; security is enforced by Row Level Security.
 - Tables: `events`, `photos`, `albums`, `posters` (weekly poster, one per Friday; only the poster for today or later is shown), `site_texts` (admin text overrides keyed by `data-edit`), `site_photos` (admin photo slots keyed by `data-photo`). Storage bucket: `gallery` (public read). Everything is public-read; **writes allowed only if `public.is_admin()`**, which checks the JWT email against a hard-coded list in `supabase/setup.sql`.
-- **Admins:** `elianm040511@gmail.com`. To add one, add the email to the array in `is_admin()` in `supabase/setup.sql` (re-run the function) **and** to `adminEmails` in `data/site.js`. The JS check only controls which buttons show; the database is the real gate.
+- **Admins:** listed in the `public.admins` table (only editable in the Supabase SQL editor; the email is deliberately **not** in this repo). To add one: `insert into public.admins (email) values ('name@example.com');`. The browser asks the database via `rpc("is_admin")` to decide which buttons to show; the database enforces permissions on every write.
 - Admin sign-in: footer "Admin login" → email + password (preferred), or leave password blank for an emailed magic link. Supabase's built-in email sender is limited to a couple of emails/hour on the free tier ("email rate limit exceeded"), so use password sign-in; the admin user was created in the Supabase dashboard (Authentication > Users > Add user, "Auto Confirm User" ticked).
 - Admin features: calendar add/edit/delete; gallery photo upload (images are resized to 1920px JPEG in the browser), photo delete, cloud-album links.
 - Supabase **Authentication > URL Configuration** must list the site URL(s) for magic links: `http://localhost:8000/**` and, once live, `https://ela-aine.github.io/FellowshipWeb/**`. Password login needs no redirect.
@@ -90,7 +90,7 @@ Without configuration it opens the visitor's mail app (`mailto:`). To send direc
 ## Git and deployment
 
 - Repo: `https://github.com/ELA-aine/FellowshipWeb` (personal account **ELA-aine**; `origin` already set). Branch `main`.
-- Local git identity is repo-level: `elianm040511@gmail.com`. Do **not** use any work (Ford) account or credentials for this repo.
+- Local git identity is repo-level and must use the GitHub **noreply** address (Settings > Emails), never a real personal email. Do **not** use any work (Ford) account or credentials for this repo.
 - The remote already contains one commit (created with the GitHub repo) that is unrelated to local history, so the first sync needs:
   `git pull origin main --rebase --allow-unrelated-histories` then `git push -u origin main` (after `gh auth login` as ELA-aine).
 - Hosting: GitHub Pages (Settings > Pages > Deploy from branch `main`, `/ (root)`). Free Pages needs a public repo. Site URL will be `https://ela-aine.github.io/FellowshipWeb/`. All paths in the site are relative, so project-page hosting works.

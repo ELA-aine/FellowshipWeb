@@ -1,7 +1,6 @@
 -- Joshua Fellowship: database setup for Supabase.
 -- Run once: Supabase dashboard > SQL Editor > New query > paste > Run.
--- To add another admin later, add their email to the array in is_admin()
--- AND to adminEmails in data/site.js.
+-- To add another admin later, insert their email into public.admins (SQL editor only).
 
 create table if not exists public.events (
   id uuid primary key default gen_random_uuid(),
@@ -33,10 +32,21 @@ create table if not exists public.albums (
   created_at timestamptz not null default now()
 );
 
+-- Admin emails live in this table, NOT in the code. RLS is on with no policies, so the
+-- table cannot be read or changed through the public API (only in the SQL editor).
+create table if not exists public.admins (email text primary key);
+alter table public.admins enable row level security;
+
 create or replace function public.is_admin() returns boolean
-language sql stable as $$
-  select lower(coalesce(auth.jwt() ->> 'email', '')) = any (array['elianm040511@gmail.com'])
+language sql stable security definer set search_path = public as $$
+  select exists (
+    select 1 from public.admins
+    where lower(email) = lower(coalesce(auth.jwt() ->> 'email', ''))
+  )
 $$;
+
+-- AFTER running this file, add yourself once in the SQL editor (do NOT save this line in the repo):
+--   insert into public.admins (email) values ('your-admin-email@example.com');
 
 alter table public.events enable row level security;
 alter table public.photos enable row level security;

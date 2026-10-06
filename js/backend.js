@@ -20,9 +20,15 @@ if (sb) {
   session = data.session;
 }
 export const user = session?.user ?? null;
-export const isAdmin =
-  !!user?.email &&
-  (S.adminEmails || []).map((e) => e.toLowerCase()).includes(user.email.toLowerCase());
+
+// Admin status comes from the database (public.is_admin()), so no email is stored in this repo.
+// This only decides which buttons to show; the database enforces permissions on every write.
+export let isAdmin = false;
+if (sb && user) {
+  const { data, error } = await sb.rpc("is_admin");
+  if (error) console.warn("Could not check admin status (run supabase/005_admins_table.sql?):", error.message);
+  else isAdmin = data === true;
+}
 
 /* ---------- Toast ---------- */
 export function toast(message, type = "ok") {
