@@ -540,3 +540,10 @@ body[data-page="home"] .site-footer { --prev: var(--sand); }
   -webkit-mask: var(--wave) center / 100% 100% no-repeat; mask: var(--wave) center / 100% 100% no-repeat;
 }
 #this-week::before { display: none; }   /* the header already draws this wave */
+
+/* ---------- Admin: edit-text mode ---------- */
+body.edit-mode [data-edit] { outline: 2px dashed var(--terracotta); outline-offset: 5px; border-radius: 4px; cursor: pointer; }
+body.edit-mode [data-edit]:hover { background: rgba(224, 168, 74, .28); }
+body.edit-mode [data-edit]::after { content: " \270E"; font-size: .7em; font-style: normal; color: var(--terracotta-dark); }
+body.edit-mode .meet-band [data-edit] { outline-color: var(--gold); }
+body.edit-mode .meet-band [data-edit]::after { color: var(--gold); }

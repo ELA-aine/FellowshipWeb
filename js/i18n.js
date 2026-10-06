@@ -127,6 +127,14 @@
     locale: () => (lang === "zh" ? "zh-CN" : "en-US"),
     translate,
     set,
+    // English source text of an element's own text nodes, even if currently translated.
+    originalText(el) {
+      let out = "";
+      el.childNodes.forEach((n) => {
+        if (n.nodeType === 3) out += textOrig.has(n) ? textOrig.get(n) : n.nodeValue;
+      });
+      return norm(out);
+    },
   };
 
   // Translate content added later (header/footer, calendar, gallery, toasts...).

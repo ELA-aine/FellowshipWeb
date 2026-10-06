@@ -16,9 +16,9 @@
   <main>
     <section class="page-hero">
       <div class="container">
-        <span class="eyebrow">Calendar</span>
-        <h1>What's happening</h1>
-        <p class="lead">Our weekly gatherings, fellowship activities and church events, all in one place.</p>
+        <span class="eyebrow" data-edit="calendar.calendar">Calendar</span>
+        <h1 data-edit="calendar.whats-happening">What's happening</h1>
+        <p class="lead" data-edit="calendar.our-weekly-gatherings-fellowship-activit">Our weekly gatherings, fellowship activities and church events, all in one place.</p>
       </div>
     </section>
 
@@ -46,7 +46,7 @@
 
         <aside>
           <div id="day-panel" class="card day-panel"></div>
-          <h3 style="margin-top:2rem">Coming up</h3>
+          <h3 style="margin-top:2rem" data-edit="calendar.coming-up">Coming up</h3>
           <div id="upcoming-list" class="upcoming"></div>
         </aside>
       </div>
@@ -59,6 +59,7 @@
   <script src="js/i18n.js"></script>
   <script src="data/events.js"></script>
   <script src="js/main.js"></script>
+  <script type="module" src="js/content.js"></script>
   <script type="module" src="js/calendar.js"></script>
 </body>
 </html>

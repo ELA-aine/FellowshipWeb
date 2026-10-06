@@ -16,9 +16,9 @@
   <main>
     <section class="page-hero">
       <div class="container">
-        <span class="eyebrow">Gallery</span>
-        <h1>Moments together</h1>
-        <p class="lead">A glimpse of life in our fellowship: worship, meals, laughter and service.</p>
+        <span class="eyebrow" data-edit="gallery.gallery">Gallery</span>
+        <h1 data-edit="gallery.moments-together">Moments together</h1>
+        <p class="lead" data-edit="gallery.a-glimpse-of-life-in-our">A glimpse of life in our fellowship: worship, meals, laughter and service.</p>
       </div>
     </section>
 
@@ -26,15 +26,15 @@
 
     <section id="albums-section" class="section" style="padding-bottom:1rem">
       <div class="container">
-        <h2>Full albums</h2>
-        <p class="lead" style="margin-bottom:2rem">These open in our cloud photo albums, where you can browse and download everything.</p>
+        <h2 data-edit="gallery.full-albums">Full albums</h2>
+        <p class="lead" style="margin-bottom:2rem" data-edit="gallery.these-open-in-our-cloud-photo">These open in our cloud photo albums, where you can browse and download everything.</p>
         <div id="albums" class="albums"></div>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <h2>Highlights</h2>
+        <h2 data-edit="gallery.highlights">Highlights</h2>
         <div id="filters" class="filters"></div>
         <div id="photos" class="photos"></div>
       </div>
@@ -55,6 +55,7 @@
   <script src="js/i18n.js"></script>
   <script src="data/gallery.js"></script>
   <script src="js/main.js"></script>
+  <script type="module" src="js/content.js"></script>
   <script type="module" src="js/gallery.js"></script>
 </body>
 </html>
