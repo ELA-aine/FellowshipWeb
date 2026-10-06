@@ -4,10 +4,10 @@ window.SITE = {
   tagline: "A warm place to belong, grow, and walk together.",
   email: "hello@example.com",
   phone: "",
-  address: "123 Main Street, Your City",
+  address: "612 Erb Street West, Waterloo, Ontario, Canada",
   meetings: [
-    { day: "Sunday", time: "10:00 AM", what: "Gathering & Worship" },
-    { day: "Wednesday", time: "7:00 PM", what: "Bible Study & Prayer" }
+    { day: "Friday", time: "6:15 PM", what: "Fellowship Dinner" },
+    { day: "Friday", time: "7:00 PM", what: "Fellowship Gathering" }
   ],
   // Contact form: create a free form at https://formspree.io and paste its
   // endpoint here (looks like "https://formspree.io/f/abcdwxyz").
