@@ -49,7 +49,7 @@ if (root) {
         dots.push(d);
         bar.append(d);
       });
-      root.append(bar);
+      root.parentElement.append(bar);
     }
     show(0);
 
@@ -59,8 +59,8 @@ if (root) {
       stop();
       if (imgs.length > 1 && !reduce) timer = setInterval(() => { if (!document.hidden) show(cur + 1); }, 5500);
     };
-    root.addEventListener("mouseenter", stop);
-    root.addEventListener("mouseleave", start);
+    root.parentElement.addEventListener("mouseenter", stop);
+    root.parentElement.addEventListener("mouseleave", start);
     start();
   }
 }
